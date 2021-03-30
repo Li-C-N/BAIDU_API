@@ -20,11 +20,12 @@ public class Selfie_anime {
      * 下载
      */
     public static String selfie_anime() {
+        String number="8";
         // 请求url
         String url = "https://aip.baidubce.com/rest/2.0/image-process/v1/selfie_anime";
         try {
             // 本地文件路径
-            String filePath = "C:\\Users\\Administrator\\Desktop\\3.png";
+            String filePath = "C:\\Users\\ljd\\Desktop\\"+number+".jpg";
             byte[] imgData = FileUtil.readFileByBytes(filePath);
             String imgStr = Base64Util.encode(imgData);
             String imgParam = URLEncoder.encode(imgStr, "UTF-8");
@@ -34,7 +35,7 @@ public class Selfie_anime {
             String result = HttpUtil.post(url, accessToken, param);
             JSONObject jsonObject = JSONObject.parseObject(result);
             String imageStr = jsonObject.getString("image");
-            BaseConvert.GenerateImage(imageStr, "C:\\Users\\Administrator\\Desktop\\2.jpg");
+            BaseConvert.GenerateImage(imageStr, "C:\\Users\\ljd\\Desktop\\"+number+".png");
 //            System.out.println(result.);
             return result;
         } catch (Exception e) {
