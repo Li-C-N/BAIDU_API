@@ -1,6 +1,9 @@
 package com.ljd.ai.utils;
 
+import com.ljd.ai.aip.UserPrivacy;
+import io.swagger.annotations.Authorization;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -24,10 +27,10 @@ public class AuthService {
      * }
      */
     public static String getAuth() {
-        // 官网获取的 API Key 更新为你注册的
-        String clientId = "";
-        // 官网获取的 Secret Key 更新为你注册的
-        String clientSecret = "";
+        // 官网获取的 API Key 更新为你注册的(注意隐私)
+        String clientId = new UserPrivacy().clientId;
+        // 官网获取的 Secret Key 更新为你注册的(注意隐私)
+        String clientSecret =new UserPrivacy().clientSecret;
         return getAuth(clientId, clientSecret);
     }
 
