@@ -38,7 +38,8 @@ logging:
 
 aliyun:
   file:
-    accessId: "LTAI5tSQhcWshCoNQrwWBXi8"          #ÇëÌîĞ´ÄúµÄAccessKeyId¡£
-    accessKey: "YPQY8U9XwA8dHlWRZVSBOOE3X7B5KJ"   #ÇëÌîĞ´ÄúµÄAccessKeySecret¡£
+    accessId: ""          #ÇëÌîĞ´ÄúµÄAccessKeyId¡£
+    accessKey: ""   #ÇëÌîĞ´ÄúµÄAccessKeySecret¡£
     endpoint: "https://oss-cn-beijing.aliyuncs.com"   #ÇëÌîĞ´ÄúµÄ endpoint¡£
     bucketName : "ljd-website"       #ÇëÌîĞ´ÄúµÄ bucketname ¡£
+
