@@ -1,33 +1,25 @@
 server:
   port: 8888
 spring:
-  # 配置数据源信息
   datasource:
     url: jdbc:mysql://39.102.133.112:3306/AI_INFO?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
     password: 2413
     driver-class-name: com.mysql.cj.jdbc.Driver
-
 pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
   helper-dialect: mysql
-
-
-
-# 开启 mybatis 驼峰标识
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.hoperun.pesystem.mapper
 
-
-# 日志配置
 logging:
   file:
-    name: log/PESYSYTEM.log
+    name: log/AI.log
   level:
     com.hoperun.pesystem.mapper: debug
     root: info
@@ -35,11 +27,4 @@ logging:
     rollingpolicy:
       max-file-size: 200MB
       max-history: 30
-
-aliyun:
-  file:
-    accessId: ""          #请填写您的AccessKeyId。
-    accessKey: ""   #请填写您的AccessKeySecret。
-    endpoint: "https://oss-cn-beijing.aliyuncs.com"   #请填写您的 endpoint。
-    bucketName : "ljd-website"       #请填写您的 bucketname 。
 

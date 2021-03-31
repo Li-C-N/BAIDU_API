@@ -1,5 +1,7 @@
 package com.ljd.ai.model;
 
+import org.springframework.stereotype.Repository;
+
 public class ImageInfo {
     /**
      *

@@ -37,7 +37,9 @@ public class BaseConvert {
     @SuppressWarnings("finally")
     public static boolean GenerateImage(String imgData, String imgFilePath) throws IOException { // 对字节数组字符串进行Base64解码并生成图片
         if (imgData == null) // 图像数据为空
+        {
             return false;
+        }
 
         Base64.Decoder decoder = Base64.getDecoder();
 

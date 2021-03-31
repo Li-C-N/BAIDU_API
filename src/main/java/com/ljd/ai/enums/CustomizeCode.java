@@ -2,6 +2,7 @@ package com.ljd.ai.enums;
 
 public enum CustomizeCode  {
     UPLOAD_IMG_SUCCESS(2001, "图片上传成功"),
+    UPLOAD_IMG_FAILED(2001, "图片上传失败"),
     ;
 
     private final Integer code;
