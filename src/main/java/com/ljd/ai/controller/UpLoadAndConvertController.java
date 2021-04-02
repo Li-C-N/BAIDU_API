@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import com.ljd.ai.utils.AliyunOSSUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,6 +34,12 @@ public class UpLoadAndConvertController {
     private UploadAndConvertService uploadService;
     @Autowired
     private ImageInfoService imageInfoService;
+    @GetMapping("/uploadImg")
+    public String upload()
+          {
+
+        return "index";
+    }
 
     @PostMapping("/uploadImg")
     @ResponseBody

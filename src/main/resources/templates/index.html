@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="">
+<script src="jquery-3.6.0.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>Convert</title>
+</head>
+<body>
+<div>
+
+    <input type="file" id="file"  name="file" />
+    <input  type="submit" value="生成" onclick="uploadFile()"/>
+
+</div>
+<br>
+<div id="before">
+<!--    <img src="" value="" id="beforefile" name="beforefile"/>-->
+</div>
+<br>
+<div id="after">
+<!--    <img src="" value="" id="afterfile" name="afterfile"/>-->
+</div>
+</body>
+
+<script >
+    function uploadFile() {
+        var file = $("#file")[0].files[0];
+        var formData = new FormData();
+        formData.append("file",file);
+        $.ajax({
+            type:'post',
+            url:'/uploadImg',
+            processData: false,
+            contentType:false,
+            data:formData,
+            success:function (msg) {
+                console.log(msg);
+                var i=String.valueOf(msg.get("imgBefore"));
+                var j=String.valueOf(msg.get("imgAfter"));
+                var html="";
+                var html1="";
+                html='<img src="'+i+'">';
+                html1='<img src="'+j+'">';
+                $("before").html(html);
+                $("after").html(html);
+            }
+        })
+    }
+</script>
+
+</html>

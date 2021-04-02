@@ -6,6 +6,12 @@ spring:
     username: root
     password: 2413
     driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+      prefix: classpath:/templates/
+      suffix: .html
+      mode: LEGACYHTML5
+      cache: false
+
 pagehelper:
   reasonable: true
   support-methods-arguments: true
@@ -27,4 +33,7 @@ logging:
     rollingpolicy:
       max-file-size: 200MB
       max-history: 30
+
+
+
 
