@@ -21,11 +21,6 @@ public class UploadAndConvertService {
         return aliyunOSSUtil.upload(file, 0);
     }
 
-    //    public  boolean Convert(String Url) {
-//        AliyunOSSUtil aliyunOSSUtil =new AliyunOSSUtil();
-//
-//        return ;
-//    }
     public String uploadAfterToOss(MultipartFile file) throws IOException {
         AliyunOSSUtil aliyunOSSUtil = new AliyunOSSUtil();
         return aliyunOSSUtil.upload(file, 1);

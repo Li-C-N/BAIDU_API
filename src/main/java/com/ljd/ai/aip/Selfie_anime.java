@@ -1,7 +1,6 @@
 package com.ljd.ai.aip;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ljd.ai.controller.UpLoadAndConvert;
 import com.ljd.ai.service.UploadAndConvertService;
 import com.ljd.ai.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +10,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
 /**
  * 人像动漫化
  */
@@ -78,7 +71,8 @@ public class Selfie_anime {
             System.out.println("//////////////////////////////////////////////////////");
         }
 
-        return BASE64DecodedMultipartFile.base64ToMultipart(imageStr);
+        String avatar = "data:image/png;base64," + imageStr;
+        return  BASE64DecodedMultipartFile.base64ToMultipart(avatar);
     }
 
 //    public static void main(String[] args) {

@@ -53,15 +53,8 @@ public class AliyunOSSUtil {
 
             return this.ossClient(newFileName, file, 0);
         } else {
-            return this.ossClient(newFileName, file, 1);
+            return this.ossClient1(newFileName, file, 1);
         }
-//            System.out.println("图片地址返回"+imgUrl);
-
-
-//        ImageInfo img = new ImageInfo();
-//        img.setiImageConvertAfterUrl(imgUrl);
-//        return imageInfoMapper.insertSelective(img)==1;
-//        return imgUrl;
     }
 
 
@@ -69,22 +62,24 @@ public class AliyunOSSUtil {
      * 上传文件
      */
     private String ossClient(String newFileName, MultipartFile file, Integer flag) throws IOException {
-        String imgUrl = "";
         // 创建OSSClient实例
         OSS client = new OSSClientBuilder().build(endpoint, accessId, accessKey);
 
         PutObjectResult result = client.putObject(bucketName, folderBefore + newFileName, new ByteArrayInputStream(file.getBytes()));
         client.shutdown();
-        if (null != result && flag == 0) {
-            // 获取上传后的图片链接
-            // 后端将地址拼接一下，oss那里设为了公共读，阿里云oss屁事太多了
+        // 获取上传后的图片链接
+        // 后端将地址拼接一下，oss那里设为了公共读，阿里云oss屁事太多了
             return webUrl + "/" + folderBefore + newFileName;
+    }
+    private String ossClient1(String newFileName, MultipartFile file, Integer flag) throws IOException {
+        // 创建OSSClient实例
+        OSS client = new OSSClientBuilder().build(endpoint, accessId, accessKey);
 
-        } else {
+        PutObjectResult result = client.putObject(bucketName, folderBefore + newFileName, new ByteArrayInputStream(file.getBytes()));
+        client.shutdown();
+        // 获取上传后的图片链接
+        // 后端将地址拼接一下，oss那里设为了公共读，阿里云oss屁事太多了
             return webUrl + "/" + folderAfter + newFileName;
-        }
-
-
     }
 }
 

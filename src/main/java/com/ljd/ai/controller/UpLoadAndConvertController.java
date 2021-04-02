@@ -28,7 +28,7 @@ import java.util.Map;
  * @create: 2021/3/26 15:15
  **/
 @Controller
-public class UpLoadAndConvert {
+public class UpLoadAndConvertController {
     @Autowired
     private UploadAndConvertService uploadService;
     @Autowired
