@@ -30,13 +30,13 @@ import java.util.UUID;
 @Component
 public class AliyunOSSUtil {
 
-    private final String endpoint = "https://oss-cn-beijing.aliyuncs.com";
-    private final String accessId = "LTAI5tSQhcWshCoNQrwWBXi8";
-    private final String accessKey = "YPQY8U9XwA8dHlWRZVSBOOE3X7B5KJ";
-    private final String bucketName = "ljd-website";
-    private final String webUrl = "https://ljd-website.oss-cn-beijing.aliyuncs.com";
-    private final String folderBefore = "Before/";
-    private final String folderAfter = "After/";
+    private final String endpoint = "";
+    private final String accessId = "";
+    private final String accessKey = "";
+    private final String bucketName = "";
+    private final String webUrl = "";
+    private final String folderBefore = "";
+    private final String folderAfter = "";
     @Autowired
     private ImageInfoMapper imageInfoMapper;
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AliyunOSSUtil.class);
