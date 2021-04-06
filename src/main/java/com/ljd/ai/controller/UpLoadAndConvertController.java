@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,12 +46,14 @@ public class UpLoadAndConvertController {
     @ResponseBody
     public Result<?> upload(HttpServletRequest httpServletRequest,
                             @RequestParam("file") MultipartFile file)
-            throws IOException {
+            throws IOException,SQLException {
+            long viewCount=uploadService.convertCount();
         String imgBefore = uploadService.uploadBeforeToOss(file);
         String imgAfter = uploadService.uploadAfterToOss(new Selfie_anime().selfie_anime(imgBefore));
         Map<String, Object> map = new HashMap<>();
         map.put("imgBefore", imgBefore);
         map.put("imgAfter", imgAfter);
+        map.put("viewCount", viewCount);
         if (imageInfoService.insert(imgBefore, imgAfter)) {
             return Result.okOf(CustomizeCode.UPLOAD_IMG_SUCCESS, map);
         }

@@ -1,51 +1,158 @@
 <!DOCTYPE html>
-<html lang="">
-<script src="jquery-3.6.0.js"></script>
+<html lang="" xmlns:width="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>Convert</title>
+    <title>Convert(AI)</title>
 </head>
+<style>
+    /*所有(包含以下四种样式)*/
+    a {
+        /*text-decoration: none; !*去掉a标签下划线*!*/
+        color: black !important;
+    }
+
+    /*未被访问的链接*/
+    a:link {
+        /*text-decoration: none;*/
+    }
+
+    /*访问过的*/
+    a:visited {
+        text-decoration: none;
+    }
+
+    /*鼠标划过（停留）*/
+    a:hover {
+        text-decoration: none;
+    }
+
+    /*正在点击*/
+    a:active {
+        text-decoration: none;
+    }
+
+    #loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        margin: -25px 0 0 -25px;
+        border: 6px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 6px solid #00A76F;
+        border-bottom: 6px solid #00A76F;
+        width: 50px;
+        height: 50px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    .test {
+        position: absolute;
+        top: 30%;
+        left: 40%;
+        width: 840px;
+        height: 810px;
+        margin: -50px 0 0 -50px;
+    }
+
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
 <body>
-<div>
+<div style="position: absolute;top:27%;left: 6%;">
+    <h2>人像漫画化(AI)</h2>
+    <h5>选择你需要转换的图片，然后点击生成按钮<br><br>
+        耐心等待系统识别，加载圈加载完毕显示并允许下载图片<br><br>
+        Tips:需要处理的图片大小不超过4M<br><br>
+        最短边至少64px，最长边最大4096px，长宽比3：1以内</h5>
+    <div >
+        <input type="file" id="file" name="file"/>
+        <input type="submit" value="生成" id="submit" onclick="uploadFile()"/><br><br>
+        <div id="download" >
+        </div>
+        <div id="viewConut">
+        </div>
+    </div>
+</div>
 
-    <input type="file" id="file"  name="file" />
-    <input  type="submit" value="生成" onclick="uploadFile()"/>
+<div class="test" style="display:inline">
+    <div id="before" style="display:inline">
+    </div>
+    <div id="after" style="display:inline">
+    </div>
+</div>
+
+
+<div id="loader">
 
 </div>
-<br>
-<div id="before">
-<!--    <img src="" value="" id="beforefile" name="beforefile"/>-->
-</div>
-<br>
-<div id="after">
-<!--    <img src="" value="" id="afterfile" name="afterfile"/>-->
-</div>
+
+
+
+
 </body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
 
-<script >
+    window.onload = function () {
+        function loadingEffect() {
+            var loading = $('#loader');
+            loading.hide();
+            $(document).ajaxStart(function () {
+                loading.show();
+                document.getElementById("file").disabled = true;
+                document.getElementById("submit").disabled = true;
+            }).ajaxSuccess(function () {
+                loading.hide();
+                document.getElementById("file").disabled = false;
+                document.getElementById("submit").disabled = false;
+            });
+        }
+
+        loadingEffect();
+    }
+
     function uploadFile() {
         var file = $("#file")[0].files[0];
+        if (file == null) {
+            alert("您还未上传文件");
+            location.reload();
+        }
         var formData = new FormData();
-        formData.append("file",file);
+        formData.append("file", file);
         $.ajax({
-            type:'post',
-            url:'/uploadImg',
+            type: 'post',
+            url: '/uploadImg',
             processData: false,
-            contentType:false,
-            data:formData,
-            success:function (msg) {
-                console.log(msg);
-                var i=String.valueOf(msg.get("imgBefore"));
-                var j=String.valueOf(msg.get("imgAfter"));
-                var html="";
-                var html1="";
-                html='<img src="'+i+'">';
-                html1='<img src="'+j+'">';
-                $("before").html(html);
-                $("after").html(html);
+            contentType: false,
+            data: formData,
+            success: function (msg) {
+                // console.log(msg);
+                // console.log(msg.data.imgBefore);
+                // console.log(msg.data.imgAfter);
+                // console.log(msg.data.viewCount);
+                $("#before").html("<img src='" + msg.data.imgBefore + "' id=" + "imgBefore" + " style='width:400px; height:400px;' alt=''/>");
+                $("#after").html("<img src='" + msg.data.imgAfter + "' id=" + "imgAfter" + " style='width:400px; height:400px;'  alt=''/>");
+                $("#download").html("<a href='" + msg.data.imgAfter + "'><h5>点击此处下载漫画人像</h5></a>");
+                $("#viewConut").html("<h5 " + " id=" + "viewConut" + "   >网站累计访问生成数："+msg.data.viewCount+"次</h5>");
+
             }
         })
     }
